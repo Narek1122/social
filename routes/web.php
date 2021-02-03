@@ -47,6 +47,13 @@ Route::get('/test',function(){
   dd($user);
 
 
+
   //hhhhh
-  //cerating new 
+  //cerating new
+
+  45545454
+  hhhhh
+
+  7kruryuk
+
 });
