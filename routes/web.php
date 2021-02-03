@@ -46,6 +46,6 @@ Route::get('/test',function(){
   $user = User::whereAge(10)->first();
   dd($user);
 
-
+  45545454
   hhhhh
 });
