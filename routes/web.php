@@ -47,5 +47,6 @@ Route::get('/test',function(){
   dd($user);
 
 
-  hhhhh
+  //hhhhh
+  //cerating new 
 });
