@@ -45,4 +45,7 @@ Route::get('/test',function(){
 
   $user = User::whereAge(10)->first();
   dd($user);
+
+
+  hhhhh
 });
