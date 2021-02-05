@@ -48,17 +48,5 @@ Route::get('/test',function(){
 
 
 
-  //hhhhh
-  //cerating new
-
-  45545454
-  hhhhh
-
-  7kruryuk
-
-  //new random text
-
-  //rjjjrjrfj
-
 
 });

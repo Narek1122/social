@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserCOntroller extends Controller
 {
@@ -12,11 +13,19 @@ class UserCOntroller extends Controller
     }
 
     public function registr(Request $request){
-      $data = $request->only('name','email','age','password');
 
-        $data['password'] = bcrypt($data['password']);
-      dd($data);
-      $user = User::create($data);
+      $validated = $request->validate([
+        'name' => 'required|string|max:16',
+        'email' => 'required|unique:users,email',
+        'age' => 'required|numeric|max:100',
+        'password' => 'required|min:6',
+      ]);
+
+
+
+        $validated['password'] = bcrypt($validated['password']);
+
+      $user = User::create($validated);
 
 
       return redirect('/login');
@@ -29,7 +38,17 @@ class UserCOntroller extends Controller
     }
 
     public function signIn(Request $request){
-      print_r($request->all());
+      $validated = $request->validate([
+        'email' => 'required',
+        'password' => 'required',
+      ]);
+
+        if(Auth::attempt($validated)){
+          dd('login');
+        } else{
+          return redirect("/login")->with('error', 'Invalid Email or Password');
+        }
+
     }
 
     public function index(){

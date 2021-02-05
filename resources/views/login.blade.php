@@ -5,7 +5,7 @@
     <title></title>
   </head>
   <body>
-    
+    @include('messages')
     <form class="" action="/login" method="post">
         <div class="">
           <input type="hidden" name="_token" value="{{csrf_token()}}">

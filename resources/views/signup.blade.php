@@ -1,6 +1,9 @@
 @extends('app.master')
 
 @section('content')
+
+@include('messages')
+
 <form class="" action="/registr" method="post">
   @csrf
   <div class="">
