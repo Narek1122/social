@@ -9,7 +9,29 @@ use Illuminate\Support\Facades\Auth;
 class UserCOntroller extends Controller
 {
     public function login(){
-      return view('login');
+      if(Auth::check()){
+      return redirect()->route('profile');
+  }else{
+    return view('login');
+  }
+    }
+
+    public function logout(){
+      Auth::logout();
+
+      return redirect()->route('login');
+    }
+
+    public function profile(){
+
+
+      return view('profile',[
+        'user' => Auth::user()
+      ]);
+    }
+
+    public function about(){
+      return view('about');
     }
 
     public function registr(Request $request){
@@ -28,7 +50,7 @@ class UserCOntroller extends Controller
       $user = User::create($validated);
 
 
-      return redirect('/login');
+      return redirect()->route('login');
 
 
     }
@@ -44,7 +66,7 @@ class UserCOntroller extends Controller
       ]);
 
         if(Auth::attempt($validated)){
-          dd('login');
+          return redirect()->route('profile');
         } else{
           return redirect("/login")->with('error', 'Invalid Email or Password');
         }
@@ -63,6 +85,8 @@ class UserCOntroller extends Controller
     return view('welcome',[
       'users' => $arr
     ]);
+
+
 
 
   }

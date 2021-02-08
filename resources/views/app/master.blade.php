@@ -10,8 +10,8 @@
   <body>
     <div class="container">
       @yield('content')
+      <a href="/">Home</a>
     </div>
-
 
   </body>
 @yield('script')

@@ -13,23 +13,27 @@ use App\User;
 |
 */
 
+
 use \Illuminate\Http\Request;
 use App\Http\Controllers\UserCOntroller;
 
 
 Route::get('/',[UserController::class, 'index']);
 
+Route::get('about',[UserController::class, 'about']);
+
+Route::get('/profile',[UserController::class, 'profile'])->name('profile')->middleware('checkUserAuth');
 
 
 
 
 
-Route::get('/login',[UserCOntroller::class, 'login']);
+Route::get('/login',[UserCOntroller::class, 'login'])->name('login');
 
 
 
 
-Route::post('/login', [UserCOntroller::class, 'signIn']);
+Route::post('/login', [UserCOntroller::class, 'signIn'])->name('post-login');
 
 
 Route::get('user/{id}',function($id){
@@ -37,7 +41,7 @@ Route::get('user/{id}',function($id){
   print_r($id);
 });
 
-Route::get('/signup',[UserCOntroller::class, 'signUp']);
+Route::get('/signup',[UserCOntroller::class, 'signUp'])->name('signup');
 
 Route::post('/registr',[UserCOntroller::class, 'registr']);
 
@@ -50,3 +54,5 @@ Route::get('/test',function(){
 
 
 });
+
+Route::post('/logout',[UserCOntroller::class, 'logout'])->name('logout')->middleware('checkUserAuth');
