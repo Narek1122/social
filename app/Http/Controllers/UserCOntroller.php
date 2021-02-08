@@ -59,6 +59,10 @@ class UserCOntroller extends Controller
       return view('signup');
     }
 
+    public function about(){
+      return view('about');
+    }
+
     public function signIn(Request $request){
       $validated = $request->validate([
         'email' => 'required',

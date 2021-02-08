@@ -49,7 +49,7 @@ Route::get('/test',function(){
 
   $user = User::whereAge(10)->first();
   dd($user);
-
+Route::post('/about',[UserCOntroller::class, 'about']);
 
 
 
