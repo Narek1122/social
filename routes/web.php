@@ -16,6 +16,7 @@ use App\User;
 
 use \Illuminate\Http\Request;
 use App\Http\Controllers\UserCOntroller;
+use App\Http\Controllers\PostController;
 
 
 Route::get('/',[UserController::class, 'index']);
@@ -49,10 +50,25 @@ Route::get('/test',function(){
 
   $user = User::whereAge(10)->first();
   dd($user);
-Route::post('/about',[UserCOntroller::class, 'about']);
+
 
 
 
 });
 
 Route::post('/logout',[UserCOntroller::class, 'logout'])->name('logout')->middleware('checkUserAuth');
+
+
+Route::get('/posts',[PostController::class, 'create'])->name('post-create')->middleware('checkUserAuth');
+
+Route::post('/posts',[PostController::class, 'store'])->name('store-posts')->middleware('checkUserAuth');
+
+
+Route::group(['middleware' => ['checkUserAuth']],function(){
+  Route::post('/logout',[UserCOntroller::class, 'logout'])->name('logout');
+
+
+  Route::get('/posts',[PostController::class, 'create'])->name('post-create');
+
+  Route::post('/posts',[PostController::class, 'store'])->name('store-posts');
+});
