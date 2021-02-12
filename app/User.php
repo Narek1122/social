@@ -46,4 +46,24 @@ class User extends Authenticatable
     public function posts(){
       return $this->hasMany(Post::class);
     }
+
+    public function getBirthYearAttribute(){
+      return (int) date('Y') - $this->age;
+    }
+
+    public function getJoinedDateAttribute(){
+      return  date('M, d Y', strtotime($this->created_at));
+    }
+
+    public function setPasswordAttribute($value){
+      $this->attributes['password'] = bcrypt($value);
+    }
+
+
+
+//     public function getNameAttribute($value){
+//       return strtoupper($value);
+//     }
+
+
 }

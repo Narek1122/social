@@ -63,6 +63,12 @@ Route::get('/posts',[PostController::class, 'create'])->name('post-create')->mid
 
 Route::post('/posts',[PostController::class, 'store'])->name('store-posts')->middleware('checkUserAuth');
 
+Route::get('me/edit',[UserController::class, 'edit'])->name('user.edit');
+
+Route::post('me/edit',[UserController::class, 'update'])->name('user.update');
+
+
+
 
 Route::group(['middleware' => ['checkUserAuth']],function(){
   Route::post('/logout',[UserCOntroller::class, 'logout'])->name('logout');
