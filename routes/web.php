@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use App\User;
 /*
 |--------------------------------------------------------------------------
@@ -46,15 +47,6 @@ Route::get('/signup',[UserCOntroller::class, 'signUp'])->name('signup');
 
 Route::post('/registr',[UserCOntroller::class, 'registr']);
 
-Route::get('/test',function(){
-
-  $user = User::whereAge(10)->first();
-  dd($user);
-
-
-
-
-});
 
 Route::post('/logout',[UserCOntroller::class, 'logout'])->name('logout')->middleware('checkUserAuth');
 
@@ -66,6 +58,8 @@ Route::post('/posts',[PostController::class, 'store'])->name('store-posts')->mid
 Route::get('me/edit',[UserController::class, 'edit'])->name('user.edit');
 
 Route::post('me/edit',[UserController::class, 'update'])->name('user.update');
+
+Route::get('/me/profile/image',[UserCOntroller::class, 'getProfileImage'])->name('userProfileImage');
 
 
 
