@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Services\UserServices;
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Requests\SignInInRequest;
 use Illuminate\Http\Request;
@@ -110,23 +111,9 @@ public function getProfileImage(){
         'image' => 'nullable|image|max:2048',
       ]);
 
-      $validated = array_filter($validated,function($value){
-        return !empty($value);
-      });
+      $userService = new UserServices(Auth::user());
+      $userService->update($validated);
 
-      Auth::user()->update($validated);
-
-      if($request->hasFile('image')){
-        if(Auth::user()->profile_image){
-            $oldImagePath = Auth::user()->profile_image;
-            if(Storage::exists($oldImagePath)){
-              Storage::delete($oldImagePath);
-            }
-        }
-        $imageName = Storage::put('images',$request->file('image'));
-        Auth::user()->profile_image = $imageName;
-        Auth::user()->save();
-}
 
     return redirect()->route('profile');
 
