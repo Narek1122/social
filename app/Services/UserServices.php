@@ -5,6 +5,8 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use \Illuminate\Http\Request;
+use App\Events\UserPasswordUpdateEvent;
+use app\Listeners\UserPasswordUpdateListener;
 
 class UserServices
 {
@@ -24,6 +26,13 @@ class UserServices
 
       $this->user->update($validated);
 
+      if(isset($validated['password'])){
+        event(
+          new UserPasswordUpdateEvent($this->user)
+        );
+      }
+
+      dd(1);
 
       if(isset($validated['image'])){
         $image = $validated['image'];
