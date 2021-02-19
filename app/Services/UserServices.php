@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use \Illuminate\Http\Request;
 use App\Events\UserPasswordUpdateEvent;
 use app\Listeners\UserPasswordUpdateListener;
+use App\Jobs\ UserPasswordUpdate;
 
 class UserServices
 {
@@ -30,9 +31,11 @@ class UserServices
         event(
           new UserPasswordUpdateEvent($this->user)
         );
+
+        // dispatch(new UserPasswordUpdate($this->user));
       }
 
-      dd(1);
+
 
       if(isset($validated['image'])){
         $image = $validated['image'];

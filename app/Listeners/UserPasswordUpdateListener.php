@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Log;
 
-class UserPasswordUpdateListener
+class UserPasswordUpdateListener implements ShouldQueue
 {
     /**
      * Create the event listener.
