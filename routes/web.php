@@ -71,4 +71,17 @@ Route::group(['middleware' => ['checkUserAuth']],function(){
   Route::get('/posts',[PostController::class, 'create'])->name('post-create');
 
   Route::post('/posts',[PostController::class, 'store'])->name('store-posts');
+
+
+});
+
+
+Route::get('test',function(){
+
+  User:create();
+  update ,
+  create,
+  find,
+  
+
 });

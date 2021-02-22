@@ -41,6 +41,6 @@ class DeleteUsers extends Command
     {
 
         User::where('updated_at', '<', Corbon::now()->subDays(30))->delete();
-      
 
+      }
 }

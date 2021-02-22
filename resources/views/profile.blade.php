@@ -6,6 +6,10 @@
     <div class="row">
         <div class="col-12 grid-margin">
             <div class="profile-header">
+              <form class="" action="{{route('logout')}}" method="post">
+                @csrf
+                <input type="submit" name="" value="Logout">
+              </form>
                 <div class="cover">
                     <div class="gray-shade"></div>
                     <figure>
