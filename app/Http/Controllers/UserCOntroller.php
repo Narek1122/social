@@ -11,9 +11,26 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Post;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
 
 class UserCOntroller extends Controller
 {
+
+
+  public function getPass(Request $request){
+
+    $response = Http::asForm()->post('http://narek1.test/oauth/token', [
+    'grant_type' => 'password',
+    'client_id' => '2',
+    'client_secret' => 'I2xBhQH5kfANSeSAzTIS5Lj8vQLZMmIqHiy31jkd',
+    'username' => $request->email,
+    'password' => $request->password,
+    'scope' => '',
+  ]);
+    return $response->json();
+
+  }
+
     public function login(){
       if(Auth::check()){
       return redirect()->route('profile');

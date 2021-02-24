@@ -24,3 +24,12 @@ Route::post('users',[UserCOntroller::class ,'apiStore']);
 Route::get('users',[UserCOntroller::class ,'GetUsers']);
 
 Route::get('users/{user}',[UserCOntroller::class ,'GetIdUsers']);
+
+Route::post('tests',[UserCOntroller::class ,'getPass']);
+
+
+Route::get('user',function(){
+
+  dd(Auth::user());
+
+})->middleware('auth:api');

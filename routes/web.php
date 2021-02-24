@@ -64,7 +64,7 @@ Route::get('/me/profile/image',[UserCOntroller::class, 'getProfileImage'])->name
 
 
 
-Route::group(['middleware' => ['checkUserAuth']],function(){
+  Route::group(['middleware' => ['checkUserAuth']],function(){
   Route::post('/logout',[UserCOntroller::class, 'logout'])->name('logout');
 
 
@@ -72,16 +72,5 @@ Route::group(['middleware' => ['checkUserAuth']],function(){
 
   Route::post('/posts',[PostController::class, 'store'])->name('store-posts');
 
-
-});
-
-
-Route::get('test',function(){
-
-  User:create();
-  update ,
-  create,
-  find,
-  
 
 });
