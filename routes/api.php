@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserCOntroller;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,6 @@ Route::post('users',[UserCOntroller::class ,'apiStore']);
 
 Route::get('users',[UserCOntroller::class ,'GetUsers']);
 
-Route::get('users/{user}',[UserCOntroller::class ,'GetIdUsers']);
 
 Route::post('tests',[UserCOntroller::class ,'getPass']);
 
@@ -33,3 +33,15 @@ Route::get('user',function(){
   dd(Auth::user());
 
 })->middleware('auth:api');
+
+Route::group(["middleware" => ["auth:api"]],function(){
+
+Route::get('users/{user}',[UserCOntroller::class ,'GetIdUsers']);
+
+Route::patch('posts/{post}/likes',[PostController::class, 'apiupdate']);
+
+Route::get('posts/{post}/likes',[PostController::class, 'apiGetLikes']);
+
+
+
+});

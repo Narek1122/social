@@ -8,6 +8,34 @@ use App\Post;
 
 class PostController extends Controller
 {
+
+  public function apiUpdate(Post $post){
+
+    $post->likes()->syncWithoutDetaching(Auth::user()->id);
+    return response()->json([
+      'status' => 1,
+    ]);
+
+  }
+
+  public function apiGetLikes(Post $post){
+
+    $post->load('likes');
+
+    $emails = $post->likes->pluck('email');
+
+
+    return response()->json([
+      'ststus' => 1,
+      'data' => [
+        'count' => $post->likes->count(),
+        'users' => $emails
+      ]
+
+    ]);
+
+  }
+
     public function create(){
       return view('posts');
     }
@@ -24,6 +52,8 @@ class PostController extends Controller
       return redirect()->route('profile');
 
     }
+
+
 
 
 }
