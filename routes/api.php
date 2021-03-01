@@ -4,7 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserCOntroller;
 use App\Http\Controllers\PostController;
-
+use App\User;
+use App\Post;
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -42,6 +44,19 @@ Route::patch('posts/{post}/likes',[PostController::class, 'apiupdate']);
 
 Route::get('posts/{post}/likes',[PostController::class, 'apiGetLikes']);
 
+Route::get('me/post-likes',[UserCOntroller::class ,'getLikedPost']);
+
+
+
+});
+
+Route::get('tests',function(){
+
+  // dd(User::where('age','>',20)->where('age','<',30)->orWhere('age','>',40)->where('age','<',60)->get());
+
+    $user = DB::table('users')->where('age','>',20)->get();
+
+    dd($user);
 
 
 });

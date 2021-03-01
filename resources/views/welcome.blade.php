@@ -1,10 +1,13 @@
 @extends('app.master')
 
 @section('title')
+
+
 login page
 @endsection
 
 @section('content')
+<h1>{{__('hellow')}}</h1>
 <h1>Hello Word</h1>
 @include ('sidebar')
 <ul>

@@ -12,10 +12,24 @@ use Illuminate\Support\Facades\Auth;
 use App\Post;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
-
+use Illuminate\Support\Facades\App;
 class UserCOntroller extends Controller
 {
 
+  public function getLikedPost(){
+
+    Auth::user()->load('likedPost');
+
+    return response()->json([
+      'status' =>1,
+      'data' => [
+        'count' =>  Auth::user()->likedPost->count(),
+        'posts' => Auth::user()->likedPost->pluck('data')
+      ]
+
+    ]);
+
+  }
 
   public function getPass(Request $request){
 
@@ -92,6 +106,8 @@ class UserCOntroller extends Controller
     }
 
     public function index(){
+
+      App::setLocale('ru');
       $arr = [
         [
           'name' => 'john',

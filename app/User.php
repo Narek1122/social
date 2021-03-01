@@ -67,4 +67,12 @@ class User extends Authenticatable
 //     }
 
 
+    public function likedPost(){
+
+      return $this->belongsToMany(
+        Post::class,'user_post_like','user_id','post_id'
+      )->withTimestamps();
+
+    }
+
 }
